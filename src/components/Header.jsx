@@ -1,17 +1,15 @@
 import React from "react";
+import logo from "../assets/logo.png";
+import signin from "../assets/signin.svg";
 
 export default function Header() {
   return (
     <div>
-      <nav className="flex justify-between text-xl items-center pb-3 pt-4">
+      <nav className="flex justify-between text-xl items-center pb-3 pt-4 border-b-2 border-gray-600">
         {/* LOGO */}
         <div className="ml-10 ">
           <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center">
-            <img
-              src="src/assets/logo.png"
-              alt="logo"
-              className="w-20 h-20 object-contain"
-            />
+            <img src={logo} alt="logo" className="w-20 h-20 object-contain" />
           </div>
         </div>
 
@@ -25,15 +23,27 @@ export default function Header() {
         </div>
 
         {/* SIGNUP BUTTON */}
-        <div className="mr-10 ">
-          <div className="space-x-5.5">
-            <select className=" p-0.5 outline-1 outline-white">
-              <option value="USD">USD</option>
-              <option value="INR">INR</option>
-              <option value="EUR">EUR</option>
-            </select>
-            <button className="bg-white px-3 py-2 rounded-2xl hover:bg-purple-300 hover:cursor-pointer">
+        <div className="mr-10 flex gap-6.5">
+          <select className=" px-2 py-2 rounded-xl outline-2 outline-white">
+            <option className="bg-blue-300" value="USD">
+              USD
+            </option>
+            <option className="bg-blue-300" value="INR">
+              INR
+            </option>
+            <option className="bg-blue-300" value="EUR">
+              EUR
+            </option>
+          </select>
+          <div>
+            <button className="flex bg-white px-3 py-2 rounded-2xl hover:bg-purple-300 hover:cursor-pointer">
               Sign Up
+              <img
+                src={signin}
+                className="ml-2"
+                alt="sign-in icon"
+                width="20px"
+              />
             </button>
           </div>
         </div>
