@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import search_icon from "../assets/search.svg";
+import { Coincontext } from "../context/Coincontext";
+
 
 function Home() {
+
+    const {allcoins} = useContext(Coincontext);
+    useEffect(()=>{
+        console.log(allcoins[0])
+    },[])
+
   return (
     <div>
       <div className="w-2xl mx-auto my-20">
@@ -33,6 +41,11 @@ function Home() {
         </div>
       </div>
       <div>
+        <div>
+            <h1 className="text-center">
+                
+            </h1>
+        </div>
         <div className="max-w-3xl mx-auto mt-10 p-4">
   <div className="overflow-hidden rounded-2xl backdrop-blur-lg bg-white/30 shadow-lg">
     <table className="w-full text-left text-gray-800">

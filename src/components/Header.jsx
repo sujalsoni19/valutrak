@@ -1,8 +1,28 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import signin from "../assets/signin.svg";
+import {Coincontext} from '../context/Coincontext'
+import { useContext } from "react";
+
+
 
 export default function Header() {
+
+  const {setCurrency} = useContext(Coincontext);
+
+  const currencychanger = (e) => {
+      let curr = e.target.value;
+
+      if(curr == "eur"){
+        setCurrency({name:curr,symbol:"€"})
+      }else if(curr == "inr"){
+        setCurrency({name:curr,symbol:"₹"})
+      }else{
+        setCurrency({name:curr,symbol:"$"})
+      }
+  }
+
+
   return (
     <div>
       <nav className="flex justify-between text-xl items-center pb-3 pt-4 border-b-2 border-gray-600">
@@ -24,14 +44,14 @@ export default function Header() {
 
         {/* SIGNUP BUTTON */}
         <div className="mr-10 flex gap-6.5">
-          <select className=" px-2 py-2 rounded-xl outline-2 outline-white">
-            <option className="bg-blue-300" value="USD">
+          <select onChange={currencychanger} className=" px-2 py-2 rounded-xl outline-2 outline-white">
+            <option className="bg-blue-300" value="usd">
               USD
             </option>
-            <option className="bg-blue-300" value="INR">
+            <option className="bg-blue-300" value="inr">
               INR
             </option>
-            <option className="bg-blue-300" value="EUR">
+            <option className="bg-blue-300" value="eur">
               EUR
             </option>
           </select>
