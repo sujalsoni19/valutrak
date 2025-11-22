@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import { Outlet } from "react-router-dom";
 import CoincontextProvider from "./context/Coincontext";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <main>
         <Outlet />
       </main>
+      <Footer />
     </div>
     </CoincontextProvider>
     

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import search_icon from "../assets/search.svg";
 import { Coincontext } from "../context/Coincontext";
-
+import { useState } from "react";
 
 function Home() {
-
-    const {allcoins} = useContext(Coincontext);
-    useEffect(()=>{
-        console.log(allcoins[0])
-    },[])
+  const { allcoins, currency } = useContext(Coincontext);
+  const [displaycoins, setDisplaycoins] = useState([]);
+  useEffect(() => {
+    setDisplaycoins(allcoins.slice(0, 10));
+  }, [allcoins]);
 
   return (
     <div>
@@ -42,44 +42,65 @@ function Home() {
       </div>
       <div>
         <div>
-            <h1 className="text-center">
-                
-            </h1>
+          <h1 className="text-center"></h1>
         </div>
         <div className="max-w-3xl mx-auto mt-10 p-4">
-  <div className="overflow-hidden rounded-2xl backdrop-blur-lg bg-white/30 shadow-lg">
-    <table className="w-full text-left text-gray-800">
-      <thead>
-        <tr className="bg-white/40">
-          <th className="py-3 px-4 font-semibold">#</th>
-          <th className="py-3 px-4 font-semibold">Coins</th>
-          <th className="py-3 px-4 font-semibold">Price</th>
-          <th className="py-3 px-4 font-semibold">24H Change</th>
-          <th className="py-3 px-4 font-semibold">Market Cap</th>
-        </tr>
-      </thead>
+          <div className="overflow-hidden rounded-2xl backdrop-blur-lg bg-white/30 shadow-lg">
+            <table className="w-full text-left text-gray-800">
+              <thead>
+                <tr className="bg-white/40">
+                  <th className="py-3 px-4 font-semibold">#</th>
+                  <th className="py-3 px-4 font-semibold">Coins</th>
+                  <th className="py-3 px-4 font-semibold">Price</th>
+                  <th className="py-3 px-4 font-semibold">24h Change(%)</th>
+                  <th className="py-3 px-4 font-semibold">Market Cap</th>
+                </tr>
+              </thead>
 
-      <tbody>
-        <tr className="border-b border-white/40 hover:bg-white/40 transition">
-          <th className="py-3 px-4">1</th>
-          <td className="py-3 px-4">Bitcoin</td>
-          <td className="py-3 px-4">$43,200</td>
-          <td className="py-3 px-4 text-green-600">+3.2%</td>
-          <td className="py-3 px-4">$820B</td>
-        </tr>
-
-        <tr className="border-b border-white/40 hover:bg-white/40 transition">
-          <th className="py-3 px-4">2</th>
-          <td className="py-3 px-4">Ethereum</td>
-          <td className="py-3 px-4">$2,250</td>
-          <td className="py-3 px-4 text-red-600">-1.1%</td>
-          <td className="py-3 px-4">$270B</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
+              {!displaycoins || displaycoins.length === 0 ? (
+                <tbody>
+                  <tr>
+                    <td colSpan="5" className="text-center py-5 text-gray-700">
+                      Loading coins...
+                    </td>
+                  </tr>
+                </tbody>
+              ) : (
+                <tbody>
+                  {displaycoins.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-white/40 hover:bg-white/40 transition"
+                    >
+                      <th className="py-3 px-4">{item.market_cap_rank}</th>
+                      <td className="py-3 px-4 flex gap-1.5">
+                        <img src={item.image} alt="coin symbol" width={25} />
+                        {item.name}
+                      </td>
+                      <td className="py-3 px-4">
+                        {currency.symbol}
+                        {item.current_price.toLocaleString()}
+                      </td>
+                      <td
+                        className={`py-3 px-4 ${
+                          item.price_change_percentage_24h >= 0
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        {item.price_change_percentage_24h.toFixed(2)}%
+                      </td>
+                      <td className="py-3 px-4">
+                        {currency.symbol}
+                        {item.market_cap.toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
