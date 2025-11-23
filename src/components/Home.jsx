@@ -2,12 +2,30 @@ import React, { useContext, useEffect } from "react";
 import search_icon from "../assets/search.svg";
 import { Coincontext } from "../context/Coincontext";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { allcoins, currency } = useContext(Coincontext);
   const [displaycoins, setDisplaycoins] = useState([]);
+  const [input, setInput] = useState("");
+
+  const inputHandler = (e) => {
+    setInput(e.target.value);
+    if (e.target.value === "") {
+      setDisplaycoins(allcoins);
+    }
+  };
+
+  const formhandler = (e) => {
+    e.preventDefault();
+    const coins = allcoins.filter((item) => {
+      return item.name.toLowerCase().includes(input.toLowerCase());
+    });
+    setDisplaycoins(coins);
+  };
+
   useEffect(() => {
-    setDisplaycoins(allcoins.slice(0, 10));
+    setDisplaycoins(allcoins);
   }, [allcoins]);
 
   return (
@@ -19,16 +37,24 @@ function Home() {
           </h1>
           <p className="text-center text-xl py-3">
             Your gateway to the world of crypto-simple, fast, and trustworthy.
-            Trade top digital assets with confidence and real-time market
+            Track top digital assets with confidence and real-time market
             insights.
           </p>
           <div className="py-3 px-3 mx-auto flex justify-evenly">
-            <form className="relative w-5/6 mx-auto">
+            <form onSubmit={formhandler} className="relative w-5/6 mx-auto">
               <input
                 type="text"
+                list="coinlist"
+                onChange={inputHandler}
+                value={input}
                 placeholder="Search crypto..."
                 className="bg-white pl-5 pr-20 py-2 w-full rounded-xl"
               />
+              <datalist id="coinlist">
+                {allcoins.map((item, index) => (
+                  <option key={index} value={item.name} />
+                ))}
+              </datalist>
 
               <button
                 type="submit"
@@ -67,16 +93,23 @@ function Home() {
                 </tbody>
               ) : (
                 <tbody>
-                  {displaycoins.map((item, index) => (
+                  {displaycoins.slice(0, 10).map((item, index) => (
                     <tr
                       key={index}
                       className="border-b border-white/40 hover:bg-white/40 transition"
                     >
                       <th className="py-3 px-4">{item.market_cap_rank}</th>
-                      <td className="py-3 px-4 flex gap-1.5">
-                        <img src={item.image} alt="coin symbol" width={25} />
-                        {item.name}
+
+                      <td className="py-3 px-4">
+                        <Link
+                          to={`/coin/${item.id}`}
+                          className="flex items-center gap-1.5"
+                        >
+                          <img src={item.image} alt="coin symbol" width={25} />
+                          {item.name}-{item.symbol}
+                        </Link>
                       </td>
+
                       <td className="py-3 px-4">
                         {currency.symbol}
                         {item.current_price.toLocaleString()}
