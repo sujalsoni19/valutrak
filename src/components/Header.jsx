@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <div>
       <nav className="flex justify-between text-xl items-center pb-3 pt-4 border-b-2 border-gray-600">
-        {/* LOGO */}
+        
         <div className="ml-10 ">
           <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center">
             <Link to="/">
@@ -32,18 +32,19 @@ export default function Header() {
           </div>
         </div>
 
-        {/* NAV LINKS */}
+        
         <div>
           <ul className="flex justify-between gap-15 ">
             <Link to="/">
               <li>Home</li>
             </Link>
-            <li>About</li>
+            <Link to="/about">
+              <li>About</li>
+            </Link>
             <li>Contact</li>
           </ul>
         </div>
 
-        {/* SIGNUP BUTTON */}
         <div className="mr-10 flex gap-6.5">
           <select
             onChange={currencychanger}
