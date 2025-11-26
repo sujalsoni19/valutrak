@@ -33,7 +33,7 @@ export default function Header() {
         </div>
 
         
-        <div>
+        <div className="hidden md:block">
           <ul className="flex justify-between gap-15 ">
             <Link to="/">
               <li>Home</li>
