@@ -54,31 +54,39 @@ function Coin() {
           </div>
         </div>
       ) : (
-        <div className="w-3/7 mx-auto mt-2 ">
-          <div className="text-center ">
+        <div className="w-full max-w-3xl mx-auto mt-4 px-4">
+          <div className="text-center">
             <img
               src={coindata.image.large}
               alt="coin_icon"
-              width="100px"
-              className="mx-auto"
+              className="mx-auto w-20 h-20 sm:w-24 sm:h-24 object-contain"
             />
-            <h1 className="text-3xl">
-              {coindata.name}-{coindata.symbol}
+            <h1 className="text-2xl sm:text-3xl mt-2">
+              {coindata.name} - {coindata.symbol}
             </h1>
           </div>
-          <div className="mt-2">
-            <Lchart historicaldata={historicaldata} />
+          <div className="mt-4">
+            <div
+              className="w-full h-62 rounded-md overflow-hidden"
+              aria-hidden={false}
+            >
+              <Lchart
+                historicaldata={historicaldata}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
           </div>
-          <div className="mt-3 w-full px-4">
-            <div className="grid grid-cols-2 gap-y-0">
-              <div className="col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
+
+          <div className="mt-4 w-full px-2 sm:px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-0 gap-x-4">
+              <div className="col-span-1 sm:col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
                 <p>Current Market Rank</p>
                 <p className="justify-self-end">
                   {coindata?.market_cap_rank ?? "—"}
                 </p>
               </div>
 
-              <div className="col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
+              <div className="col-span-1 sm:col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
                 <p>Current Price</p>
                 <p className="justify-self-end">
                   {currency.symbol}
@@ -88,7 +96,7 @@ function Coin() {
                 </p>
               </div>
 
-              <div className="col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
+              <div className="col-span-1 sm:col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
                 <p>Market Cap</p>
                 <p className="justify-self-end">
                   {currency.symbol}
@@ -98,7 +106,7 @@ function Coin() {
                 </p>
               </div>
 
-              <div className="col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
+              <div className="col-span-1 sm:col-span-2 grid grid-cols-2 items-center py-2 border-b border-gray-200">
                 <p>24 hour High</p>
                 <p className="justify-self-end">
                   {currency.symbol}
@@ -108,7 +116,7 @@ function Coin() {
                 </p>
               </div>
 
-              <div className="col-span-2 grid grid-cols-2 items-center pt-2">
+              <div className="col-span-1 sm:col-span-2 grid grid-cols-2 items-center pt-2">
                 <p>24 hour Low</p>
                 <p className="justify-self-end">
                   {currency.symbol}

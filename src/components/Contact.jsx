@@ -108,21 +108,15 @@ function Contact() {
           </div>
         </form>
       </div>
-      <div className="flex gap-4 mt-10 w-1/5 mx-auto ">
-        <h1 className="text-2xl">Follow us on:</h1>
+      <div className="flex flex-wrap gap-4 mt-10 mx-auto items-center justify-center">
+        <h1 className="text-2xl whitespace-nowrap">Follow us on:</h1>
+
         <a href="https://github.com/sujalsoni19" target="_blank">
-          <img
-            src={githubicon}
-            alt="GitHub"
-            className="w-8 h-8 hover:opacity-80 transition"
-          />
+          <img src={githubicon} alt="GitHub" className="w-8 h-8 shrink-0" />
         </a>
+
         <a href="https://www.linkedin.com/in/sujal-soni19" target="_blank">
-          <img
-            src={linkedinicon}
-            alt="LinkedIn"
-            className="w-8 h-8 hover:opacity-80 transition"
-          />
+          <img src={linkedinicon} alt="LinkedIn" className="w-8 h-8 shrink-0" />
         </a>
       </div>
     </div>
