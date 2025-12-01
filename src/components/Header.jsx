@@ -4,11 +4,14 @@ import signin from "../assets/signin.svg";
 import menu from "../assets/menu.svg";
 import { Coincontext } from "../context/Coincontext";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
   const { setCurrency } = useContext(Coincontext);
   const [menushow, setMenushow] = useState(false);
+  const location = useLocation();
+
+  const hideDropdown = ["/about", "/contact"].includes(location.pathname);
 
   const currencychanger = (e) => {
     const curr = e.target.value;
@@ -50,20 +53,22 @@ function Header() {
             </ul>
           </div>
           <div className="text-sm sm:text-lg flex flex-1 gap-6 items-center justify-end">
-            <select
-              onChange={currencychanger}
-              className="px-2 py-2 rounded-xl ring-2 ring-white focus:outline-none"
-            >
-              <option className="bg-blue-300" value="usd">
-                USD
-              </option>
-              <option className="bg-blue-300" value="inr">
-                INR
-              </option>
-              <option className="bg-blue-300" value="eur">
-                EUR
-              </option>
-            </select>
+            {!hideDropdown && (
+              <select
+                onChange={currencychanger}
+                className="px-2 py-2 rounded-xl ring-2 ring-white focus:outline-none"
+              >
+                <option className="bg-blue-300" value="usd">
+                  USD
+                </option>
+                <option className="bg-blue-300" value="inr">
+                  INR
+                </option>
+                <option className="bg-blue-300" value="eur">
+                  EUR
+                </option>
+              </select>
+            )}
 
             <button className="flex bg-white px-3 py-2 rounded-2xl hover:bg-purple-300 hover:cursor-pointer items-center">
               Sign Up
@@ -90,17 +95,17 @@ function Header() {
                 shadow-lg text-lg flex flex-col z-10"
             >
               <ul className="space-y-3">
-                <Link to="/">
+                <Link to="/" onClick={() => setMenushow(false)}>
                   <li className="whitespace-nowrap px-2 py-1 hover:bg-white/30 rounded-md transition">
                     Home
                   </li>
                 </Link>
-                <Link to="/about">
+                <Link to="/about" onClick={() => setMenushow(false)}>
                   <li className="whitespace-nowrap px-2 py-1 hover:bg-white/30 rounded-md transition">
                     About
                   </li>
                 </Link>
-                <Link to="/contact">
+                <Link to="/contact" onClick={() => setMenushow(false)}>
                   <li className="whitespace-nowrap px-2 py-1 hover:bg-white/30 rounded-md transition">
                     Contact
                   </li>
@@ -115,4 +120,3 @@ function Header() {
 }
 
 export default Header;
-
