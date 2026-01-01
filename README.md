@@ -11,7 +11,7 @@ ValuTrak is a modern cryptocurrency tracking platform that provides live market 
 - **Styling:** Tailwind CSS  
 - **Data Source:** CoinGecko API
 - **Charts & Visualization:** React Google Charts 
-- **State Management:** React Hooks 
+- **State Management:** React Hooks
 
 ---
 
@@ -21,6 +21,17 @@ ValuTrak is a modern cryptocurrency tracking platform that provides live market 
 - Real-time cryptocurrency prices
 - Live market capitalization rankings
 - 24h price change and volume tracking
+- **Multi-currency support: USD (default), EUR, and INR**
+
+### 💱 Currency Selection
+- Toggle between **USD, EUR, and INR**
+- USD set as the default currency
+- Prices, market cap, and charts update instantly based on selected currency
+
+### 📊 Interactive Charts
+- Price history charts using React Google Charts
+- Currency-aware chart updates
+- Smooth and responsive data visualization
 
 ### 🔍 Detailed Coin Insights
 - Individual cryptocurrency detail pages
